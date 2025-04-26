@@ -1,0 +1,16 @@
+Selected Features
+age
+campaign
+pdays
+previous
+emp.var.rate
+cons.price.idx
+cons.conf.idx
+euribor3m
+nr.employed
+job
+marital
+education
+month
+day_of_week
+poutcome
