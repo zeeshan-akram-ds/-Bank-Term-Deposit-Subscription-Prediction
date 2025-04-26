@@ -16,17 +16,17 @@ st.header("Client Information")
 col1, col2 = st.columns(2)
 
 with col1:
-    age = st.number_input("Age", min_value=18, max_value=100)
-    campaign = st.number_input("Contacts during Campaign", min_value=1, max_value=50)
-    pdays = st.number_input("Days Since Last Contact", min_value=-1, max_value=1000)
-    previous = st.number_input("Previous Contacts", min_value=0, max_value=50)
-    emp_var_rate = st.number_input("Employment Variation Rate", min_value=-3.0, max_value=2.0, step=0.1)
+    age = st.number_input("Age", min_value=18, max_value=100, help="Client's age (between 18 and 100 years).")
+    campaign = st.number_input("Contacts during Campaign", min_value=1, max_value=50, help="Number of times the client was contacted during this campaign.")
+    pdays = st.number_input("Days Since Last Contact", min_value=-1, max_value=1000, help="-1 means the client has not been contacted previously.")
+    previous = st.number_input("Previous Contacts", min_value=0, max_value=50, help="Number of contacts made before this campaign.")
+    emp_var_rate = st.number_input("Employment Variation Rate", min_value=-3.0, max_value=2.0, step=0.1, help="Quarterly employment variation rate.")
 
 with col2:
-    cons_price_idx = st.number_input("Consumer Price Index", min_value=90.0, max_value=100.0, step=0.01)
-    cons_conf_idx = st.number_input("Consumer Confidence Index", min_value=-60.0, max_value=0.0, step=0.1)
-    euribor3m = st.number_input("Euribor 3 Month Rate", min_value=0.0, max_value=6.0, step=0.01)
-    nr_employed = st.number_input("Number of Employees", min_value=4900.0, max_value=5300.0, step=0.1)
+    cons_price_idx = st.number_input("Consumer Price Index", min_value=90.0, max_value=100.0, step=0.01, help="Consumer price index (monthly), a measure of inflation.")
+    cons_conf_idx = st.number_input("Consumer Confidence Index", min_value=-60.0, max_value=0.0, step=0.1, help="Consumer confidence index, reflects consumer sentiments about the economy.")
+    euribor3m = st.number_input("Euribor 3 Month Rate", min_value=0.0, max_value=6.0, step=0.01, help="Euribor 3 month rate, the interest rate at which eurozone banks borrow from each other.")
+    nr_employed = st.number_input("Number of Employees", min_value=4900.0, max_value=5300.0, step=0.1, help="Number of employees in the company (quarterly).")
 
 st.header("Client Profile")
 
@@ -35,20 +35,30 @@ col3, col4 = st.columns(2)
 with col3:
     job = st.selectbox("Job", 
         options=['housemaid', 'services', 'admin', 'blue-collar', 'technician', 'retired',
-                 'management', 'unemployed', 'self-employed', 'unknown', 'entrepreneur', 'student'])
+                 'management', 'unemployed', 'self-employed', 'unknown', 'entrepreneur', 'student'],
+        help="The client's job type (e.g., housemaid, services, admin, etc.)")
 
-    marital = st.selectbox("Marital Status", options=['married', 'single', 'divorced'])
+    marital = st.selectbox("Marital Status", 
+        options=['married', 'single', 'divorced'],
+        help="The client's marital status (married, single, or divorced)")
 
     education = st.selectbox("Education Level",
-        options=['basic_education', 'high_school', 'professional_course', 'unknown', 'university_degree'])
+        options=['basic_education', 'high_school', 'professional_course', 'unknown', 'university_degree'],
+        help="The highest education level of the client (e.g., basic education, high school, university degree)")
 
 with col4:
     month = st.selectbox("Last Contact Month",
-        options=['may', 'jun', 'jul', 'aug', 'oct', 'nov', 'dec', 'mar', 'apr', 'sep'])
+        options=['may', 'jun', 'jul', 'aug', 'oct', 'nov', 'dec', 'mar', 'apr', 'sep'],
+        help="The month during which the client was last contacted.")
 
-    day_of_week = st.selectbox("Last Contact Day", options=['mon', 'tue', 'wed', 'thu', 'fri'])
+    day_of_week = st.selectbox("Last Contact Day", 
+        options=['mon', 'tue', 'wed', 'thu', 'fri'],
+        help="The day of the week when the client was last contacted.")
 
-    poutcome = st.selectbox("Outcome of Previous Campaign", options=['nonexistent', 'failure', 'success'])
+    poutcome = st.selectbox("Outcome of Previous Campaign", 
+        options=['nonexistent', 'failure', 'success'],
+        help="The outcome of the previous marketing campaign (e.g., failure, success, or nonexistent).")
+
 
 if st.button("Predict Subscription"):
     with st.spinner('Making prediction... Please wait'):
